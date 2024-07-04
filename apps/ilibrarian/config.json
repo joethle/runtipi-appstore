@@ -1,11 +1,10 @@
 {
-  "$schema": "../schema.json",
   "name": "iLibrarian",
   "id": "ilibrarian",
   "available": true,
   "short_desc": "It is a reference manager, PDF manager and organizer.",
   "author": "iLibrarian",
-  "port": 8801,
+  "port": 5006,
   "categories": ["utilities"],
   "description": "I, Librarian is an online service that will organize your collection of PDF papers and office documents.",
   "tipi_version": 1,
