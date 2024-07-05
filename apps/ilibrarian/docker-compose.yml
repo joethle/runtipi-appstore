@@ -11,3 +11,28 @@ services:
       - ${APP_PORT}:9001
     networks:
       - tipi_main_network # That should not be changed
+    labels: # Use your editors search and replace feature to replace all instances of "ilibrarian" with your app name in the traefik labels
+      # Main
+      traefik.enable: true
+      traefik.http.middlewares.ilibrarian-web-redirect.redirectscheme.scheme: https
+      traefik.http.services.ilibrarian.loadbalancer.server.port: 8443 # Should be the same as the app internal port so for this example 9443
+      # Web
+      traefik.http.routers.ilibrarian-insecure.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.ilibrarian-insecure.entrypoints: web
+      traefik.http.routers.ilibrarian-insecure.service: ilibrarian
+      traefik.http.routers.ilibrarian-insecure.middlewares: ilibrarian-web-redirect
+      # Websecure
+      traefik.http.routers.ilibrarian.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.ilibrarian.entrypoints: websecure
+      traefik.http.routers.ilibrarian.service: ilibrarian
+      traefik.http.routers.ilibrarian.tls.certresolver: myresolver
+      # Local domain
+      traefik.http.routers.ilibrarian-local-insecure.rule: Host(`ilibrarian.${LOCAL_DOMAIN}`)
+      traefik.http.routers.ilibrarian-local-insecure.entrypoints: web
+      traefik.http.routers.ilibrarian-local-insecure.service: ilibrarian
+      traefik.http.routers.ilibrarian-local-insecure.middlewares: ilibrarian-web-redirect
+      # Local domain secure
+      traefik.http.routers.ilibrarian-local.rule: Host(`ilibrarian.${LOCAL_DOMAIN}`)
+      traefik.http.routers.ilibrarian-local.entrypoints: websecure
+      traefik.http.routers.ilibrarian-local.service: ilibrarian
+      traefik.http.routers.ilibrarian-local.tls: true
