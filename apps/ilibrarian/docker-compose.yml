@@ -15,7 +15,7 @@ services:
       # Main
       traefik.enable: true
       traefik.http.middlewares.ilibrarian-web-redirect.redirectscheme.scheme: https
-      traefik.http.services.ilibrarian.loadbalancer.server.port: 80 # Should be the same as the app internal port so for this example 9443
+      traefik.http.services.ilibrarian.loadbalancer.server.port: ${APP_PORT}:80 # Should be the same as the app internal port so for this example 9443
       # Web
       traefik.http.routers.ilibrarian-insecure.rule: Host(`${APP_DOMAIN}`)
       traefik.http.routers.ilibrarian-insecure.entrypoints: web
