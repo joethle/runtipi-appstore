@@ -7,6 +7,8 @@ services:
     restart: unless-stopped # Do not change this
     ports:
       - 8080:80
+    volumes:
+      - /home/irobot/:/app
     networks:
       - tipi_main_network # That should not be changed
     labels: # Use your editors search and replace feature to replace all instances of "ilibrarian" with your app name in the traefik labels
