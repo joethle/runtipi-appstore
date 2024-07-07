@@ -2,7 +2,7 @@ version: "2"
 services:
   ilibrarian: # Should be exact same name as "id" field in config.json
     container_name: ilibrarian # Should be exact same name as "id" field in config.json
-    image: duytravel8/ilibrarian:2ndtry # Try to avoid "latest" tag. As it may break configs in the future.
+    image: cgrima/i-librarian # Try to avoid "latest" tag. As it may break configs in the future.
     privileged: true
     restart: unless-stopped # Do not change this
     ports:
